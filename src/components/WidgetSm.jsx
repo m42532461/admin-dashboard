@@ -10,7 +10,7 @@ const WidgetSm = () => {
       <ul className="widgetSmList ">
         <li className="widgetSmListItem flex items-center justify-between my-5">
           <img
-            src="/"
+            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt="/"
             className="widgetSmImg w-[40px] h-[40px] rounded-full object-cover bg-black"
           />

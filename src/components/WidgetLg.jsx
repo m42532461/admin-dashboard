@@ -2,11 +2,11 @@ import React from "react";
 
 const WidgetLg = () => {
   return (
-    <div className="widgetLg flex flex-[2] shadow-lg p-5">
+    <div className="widgetLg flex-col flex-[2] shadow-lg p-5">
       <h3 className="widgetLgTilte text-[22px] font-semibold">
         Latest transactions
       </h3>
-      <table className="widgetLgTable w-full border-[20px]">
+      <table className="widgetLgTable w-full m-[20px]">
         <tr className="widgetLgTr">
           <th className="widgetLgTh text-left">Customer</th>
           <th className="widgetLgTh text-left">Date</th>
@@ -16,9 +16,9 @@ const WidgetLg = () => {
         <tr className="widgetLgTr">
           <td className="widgetLgUser flex items-center font-semibold">
             <img
-              src="/"
+              src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
               alt=""
-              className="widgetLgImg mr-[10px] h-10 w-10 object-cover"
+              className="widgetLgImg mr-[10px] w-10 h-10 rounded-full object-cover"
             />
             <span className="widgetLgName">Susan Carol</span>
           </td>
@@ -34,13 +34,17 @@ const WidgetLg = () => {
           </td>
         </tr>
         <tr className="widgetLgTr">
-          <td className="widgetLgUser">
-            <img src="/" alt="" className="widgetLgImg mr-[10px]" />
+          <td className="widgetLgUser flex items-center font-semibold">
+            <img
+              src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              alt=""
+              className="widgetLgImg mr-[10px] w-10 h-10 rounded-full object-cover"
+            />
             <span className="widgetLgName">Susan Carol</span>
           </td>
-          <td className="widgetLgDate">2 Jun 2021</td>
-          <td className="widgetLgAmount">$122.00</td>
-          <td className="widgetLgStatus">
+          <td className="widgetLgDate font-light">2 Jun 2021</td>
+          <td className="widgetLgAmount font-light">$122.00</td>
+          <td className="widgetLgStatus font-light">
             <button
               className="py-[5px] px-[7px] rounded-[10px] bg-[#fff0f1] text-[#d95087]"
               type="Declined"
@@ -50,13 +54,17 @@ const WidgetLg = () => {
           </td>
         </tr>
         <tr className="widgetLgTr">
-          <td className="widgetLgUser">
-            <img src="/" alt="" className="widgetLgImg mr-[10px]" />
+          <td className="widgetLgUser flex items-center font-semibold">
+            <img
+              src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              alt=""
+              className="widgetLgImg mr-[10px] w-10 h-10 rounded-full object-cover"
+            />
             <span className="widgetLgName">Susan Carol</span>
           </td>
-          <td className="widgetLgDate">2 Jun 2021</td>
-          <td className="widgetLgAmount">$122.00</td>
-          <td className="widgetLgStatus">
+          <td className="widgetLgDate font-light">2 Jun 2021</td>
+          <td className="widgetLgAmount font-light">$122.00</td>
+          <td className="widgetLgStatus font-light">
             <button
               className="py-[5px] px-[7px] rounded-[10px] bg-[#ebf1fe] text-[#2a7ade]"
               type="Pending"
@@ -66,13 +74,17 @@ const WidgetLg = () => {
           </td>
         </tr>
         <tr className="widgetLgTr">
-          <td className="widgetLgUser">
-            <img src="/" alt="" className="widgetLgImg mr-[10px]" />
+          <td className="widgetLgUser flex items-center font-semibold">
+            <img
+              src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              alt=""
+              className="widgetLgImg mr-[10px] w-10 h-10 rounded-full object-cover"
+            />
             <span className="widgetLgName">Susan Carol</span>
           </td>
-          <td className="widgetLgDate">2 Jun 2021</td>
-          <td className="widgetLgAmount">$122.00</td>
-          <td className="widgetLgStatus">
+          <td className="widgetLgDate font-light">2 Jun 2021</td>
+          <td className="widgetLgAmount font-light">$122.00</td>
+          <td className="widgetLgStatus font-light">
             <button
               className="py-[5px] px-[7px] rounded-[10px] bg-[#e5faf2]"
               type="Approved"

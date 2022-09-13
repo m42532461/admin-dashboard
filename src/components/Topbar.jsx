@@ -23,7 +23,7 @@ const Topbar = () => {
             <Settings />
           </div>
           <img
-            src=""
+            src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
             className="topAvator w-10 h-10 rounded-full cursor-pointer bg-red-200"
           />
