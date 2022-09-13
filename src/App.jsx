@@ -1,168 +1,17 @@
+import Home from "./pages/Home";
 import { useState } from "react";
-import Topbar from "./components/topbar/Topbar";
-
+import Sidebar from "./components/Sidebar";
+import Topbar from "./components/Topbar";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="App  ">
+    <div className="App mt-[10px]">
       <Topbar />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
-      test
-      <br />
+      <div className=" flex">
+        <Sidebar />
+        <Home />
+      </div>
     </div>
   );
 }
