@@ -6,6 +6,7 @@ import UserList from "./pages/UserList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import User from "./pages/User";
 import NewUser from "./pages/NewUser";
+import ProductList from "./pages/ProductList";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -20,6 +21,9 @@ function App() {
             <Route path="/users" element={<UserList />} />
             <Route path="/user/:userId" element={<User />} />
             <Route path="/newUser" element={<NewUser />} />
+            <Route path="/products" element={<ProductList />} />
+            <Route path="/product/:productId" element={<ProductList />} />
+            <Route path="/newproduct" element={<ProductList />} />
           </Routes>
         </div>
       </div>

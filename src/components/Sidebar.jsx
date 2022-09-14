@@ -11,9 +11,11 @@ const Sidebar = () => {
             Dashboard
           </h3>
           <ul className="sidebarList p-[5px]">
-            <ListItem title="Home">
-              <LineStyle className="mr-[5px] text-[20px] " />
-            </ListItem>
+            <Link to="/">
+              <ListItem title="Home">
+                <LineStyle className="mr-[5px] text-[20px] " />
+              </ListItem>
+            </Link>
             <ListItem title="Analytics">
               <Timeline className="mr-[5px] text-[20px] " />
             </ListItem>
