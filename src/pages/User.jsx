@@ -7,15 +7,18 @@ import {
   Publish,
 } from "@mui/icons-material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const User = () => {
   return (
     <div className="user flex-col flex-[4] p-5 ">
       <div className="userTitleContainer flex items-center justify-between">
         <h1 className="userTitle">Edit User</h1>
-        <button className="userAddButton w-20 p-[10px] bg-teal-600 cursor-pointer text-white text-[16px] rounded-[10px]">
-          Create
-        </button>
+        <Link to="/newUser">
+          <button className="userAddButton w-20 p-[10px] bg-teal-600 cursor-pointer text-white text-[16px] rounded-[10px]">
+            Create
+          </button>
+        </Link>
       </div>
       <div className="userContainer flex mt-5">
         <div className="userShow flex flex-col flex-1 p-5 shadow-lg">
