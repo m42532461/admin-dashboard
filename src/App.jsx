@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import UserList from "./pages/UserList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import User from "./pages/User";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -14,8 +15,9 @@ function App() {
         <div className=" flex">
           <Sidebar />
           <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/users" element={<UserList />}></Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/users" element={<UserList />} />
+            <Route path="/user/:userId" element={<User />} />
           </Routes>
         </div>
       </div>
