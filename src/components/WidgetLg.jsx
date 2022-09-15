@@ -29,7 +29,7 @@ const WidgetLg = () => {
         </tr>
         {Array.isArray(orders) ? (
           orders.map((order) => (
-            <tr className="widgetLgTr">
+            <tr className="widgetLgTr" key={order._id}>
               <td className="widgetLgUser flex items-center font-semibold">
                 <span className="widgetLgName">{order.userId}</span>
               </td>

@@ -14,7 +14,6 @@ const WidgetSm = () => {
       }
     };
     getUsers();
-    console.log(users);
   }, []);
   return (
     <div className="widgetSm flex-col flex-1 shadow-lg p-5 mr-5">
