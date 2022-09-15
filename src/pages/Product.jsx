@@ -1,5 +1,5 @@
 import { Publish } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Chart from "../components/Chart";
@@ -7,10 +7,49 @@ import { productData } from "../data";
 const Product = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
+  const [pStats, setPStats] = useState([]);
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+
+  const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await userRequest.get("orders/income?pid=" + productId);
+        const list = res.data.sort((a, b) => {
+          return a._id - b._id;
+        });
+        list.map((item) =>
+          setPStats((prev) => [
+            ...prev,
+            { name: MONTHS[item._id - 1], Sales: item.total },
+          ])
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStats();
+  }, [productId, MONTHS]);
 
   return (
     <div className="product flex flex-col flex-[4] m-5 ">
@@ -24,7 +63,7 @@ const Product = () => {
       </div>
       <div className="productTop flex">
         <div className="productTopLeft flex-1">
-          <Chart title="Sales Performance" data={productData} dataKey="Sales" />
+          <Chart title="Sales Performance" data={pStats} dataKey="Sales" />
         </div>
         <div className="productTopRight flex flex-col flex-1 p-5 m-5 shadow-lg">
           <div className="productInfoTop flex items-center">
