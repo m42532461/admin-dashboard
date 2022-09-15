@@ -1,9 +1,17 @@
 import { Publish } from "@mui/icons-material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import Chart from "../components/Chart";
 import { productData } from "../data";
 const Product = () => {
+  const location = useLocation();
+  const productId = location.pathname.split("/")[2];
+
+  const product = useSelector((state) =>
+    state.product.products.find((product) => product._id === productId)
+  );
+
   return (
     <div className="product flex flex-col flex-[4] m-5 ">
       <div className="productTitleContainer flex  items-center justify-between">
@@ -21,28 +29,27 @@ const Product = () => {
         <div className="productTopRight flex flex-col flex-1 p-5 m-5 shadow-lg">
           <div className="productInfoTop flex items-center">
             <img
-              src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={product.img}
               alt="img"
               className="productInfoImg h-10 w-10 rounded-full object-cover "
             />
-            <span className="productName font-semibold">Apple Airpods</span>
+            <span className="productName font-semibold">{product.title}</span>
           </div>
           <div className="productInfoBottom mt-[10px]">
             <div className="productInfoItem flex justify-between w-[150px]">
               <span className="productInfoKey">id:</span>
-              <span className="productInfoValue font-light">123</span>
+              <span className="productInfoValue font-light">{product._id}</span>
             </div>
             <div className="productInfoItem flex justify-between w-[150px]">
               <span className="productInfoKey">sales</span>
               <span className="productInfoValue font-light">5123</span>
             </div>
-            <div className="productInfoItem flex justify-between w-[150px]">
-              <span className="productInfoKey">active</span>
-              <span className="productInfoValue font-light">yes</span>
-            </div>
+
             <div className="productInfoItem flex justify-between w-[150px]">
               <span className="productInfoKey">in stock:</span>
-              <span className="productInfoValue font-light">no</span>
+              <span className="productInfoValue font-light">
+                {product.inStock}
+              </span>
             </div>
           </div>
         </div>
@@ -54,23 +61,30 @@ const Product = () => {
             <input
               className="mb-[10px] p-[5px] border-gray-400 border-b"
               type="text"
-              placeholder="Apple AirPod"
+              placeholder={product.title}
+            />
+            <label className="mb-[10px] text-[gray]">Product Description</label>
+            <input
+              className="mb-[10px] p-[5px] border-gray-400 border-b"
+              type="text"
+              placeholder={product.desc}
+            />
+            <label className="mb-[10px] text-[gray]">Product Price</label>
+            <input
+              className="mb-[10px] p-[5px] border-gray-400 border-b"
+              type="text"
+              placeholder={product.price}
             />
             <label className="mb-[10px] text-[gray]">In Stock</label>
             <select className="mb-[10px] border" name="inStock" id="inStock">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-            <label className="mb-[10px] text-[gray]">Active</label>
-            <select className="mb-[10px] border" name="active" id="active">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
           <div className="productFormRight flex flex-col justify-around">
             <div className="productUpload flex items-center">
               <img
-                src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                src={product.img}
                 alt=""
                 className="productUploadImg w-[100px] h-[100px]"
               />
