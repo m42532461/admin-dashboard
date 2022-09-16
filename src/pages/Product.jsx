@@ -3,8 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Chart from "../components/Chart";
-import { productData } from "../data";
-import { getProduct } from "../redux/apiCalls";
 import { userRequest } from "../requestMethods";
 const Product = () => {
   const location = useLocation();
@@ -15,10 +13,21 @@ const Product = () => {
     state.product.products.find((product) => product._id === productId)
   );
 
+  const [input, setInput] = useState({
+    title: product.title,
+    desc: product.desc,
+    price: product.price,
+  });
+  const [file, setFile] = useState(product.img);
+  const [cat, setCat] = useState(product.cat);
+
   const handleUpdate = (e) => {
     e.preventDefault();
   };
-
+  const handleInput = (e) => {
+    setInput({ [e.target.name]: e.target.value });
+  };
+  console.log({ ...input, file, cat });
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -57,8 +66,6 @@ const Product = () => {
     getStats();
   }, [productId, MONTHS]);
 
-  // get product detail
-  // set product state
   // onChange -> setState
   // onClick -> update product
 
@@ -112,21 +119,32 @@ const Product = () => {
               className="mb-[10px] p-[5px] border-gray-400 border-b"
               type="text"
               placeholder={product.title}
+              onChange={handleInput}
+              name="title"
             />
             <label className="mb-[10px] text-[gray]">Product Description</label>
             <input
               className="mb-[10px] p-[5px] border-gray-400 border-b"
               type="text"
               placeholder={product.desc}
+              onChange={handleInput}
+              name="desc"
             />
             <label className="mb-[10px] text-[gray]">Product Price</label>
             <input
               className="mb-[10px] p-[5px] border-gray-400 border-b"
               type="text"
               placeholder={product.price}
+              onChange={handleInput}
+              name="price"
             />
             <label className="mb-[10px] text-[gray]">In Stock</label>
-            <select className="mb-[10px] border" name="inStock" id="inStock">
+            <select
+              className="mb-[10px] border"
+              name="inStock"
+              id="inStock"
+              onChange={handleInput}
+            >
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
