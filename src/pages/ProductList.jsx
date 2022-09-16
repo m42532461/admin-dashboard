@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const ProductList = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
@@ -22,7 +23,6 @@ const ProductList = () => {
       headerName: "Product",
       width: 200,
       renderCell: (params) => {
-        console.log(params.row);
         return (
           <div className="productListUser flex items-center">
             <img

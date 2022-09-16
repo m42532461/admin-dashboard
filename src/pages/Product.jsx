@@ -1,33 +1,101 @@
 import { Publish } from "@mui/icons-material";
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Chart from "../components/Chart";
 import { userRequest } from "../requestMethods";
+import { updateProduct } from "../redux/apiCalls";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../firebase";
 const Product = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+  console.log(product);
 
-  const [input, setInput] = useState({
-    title: product.title,
-    desc: product.desc,
-    price: product.price,
-  });
-  const [file, setFile] = useState(product.img);
-  const [cat, setCat] = useState(product.cat);
+  const [title, setTitle] = useState(product.title);
+  const [desc, setDesc] = useState(product.desc);
+  const [price, setPrice] = useState(product.price);
+  const [inStock, setInStock] = useState(product.inStock);
 
-  const handleUpdate = (e) => {
+  const [file, setFile] = useState(null);
+  const categories = product.categories.reduce((a, b) => a + "," + b);
+  const [cat, setCat] = useState(product.categories);
+
+  const handleCat = (e) => {
+    setCat(e.target.value.split(","));
+  };
+  console.log(inStock);
+  const handleUpdate = async (e) => {
     e.preventDefault();
+    let updatedProduct = {
+      ...product,
+      title,
+      desc,
+      price,
+      inStock,
+      categories: cat,
+    };
+
+    if (!file) {
+      updateProduct(productId, updatedProduct, dispatch);
+    } else {
+      const fileName = new Date().getTime() + file.name;
+      const storage = getStorage(app);
+      const storageRef = ref(storage, fileName);
+
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      // Register three observers:
+      // 1. 'state_changed' observer, called any time the state changes
+      // 2. Error observer, called on failure
+      // 3. Completion observer, called on successful completion
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Observe state change events such as progress, pause, and resume
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+        },
+        () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            updatedProduct = { ...updatedProduct, img: downloadURL };
+
+            console.log(updatedProduct);
+            updateProduct(productId, updatedProduct, dispatch);
+          });
+        }
+      );
+    }
+    navigate("/products");
   };
-  const handleInput = (e) => {
-    setInput({ [e.target.name]: e.target.value });
-  };
-  console.log({ ...input, file, cat });
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -90,7 +158,7 @@ const Product = () => {
               alt="img"
               className="productInfoImg h-10 w-10 rounded-full object-cover "
             />
-            <span className="productName font-semibold">{product.title}</span>
+            <span className="productName font-semibold">{product?.title}</span>
           </div>
           <div className="productInfoBottom mt-[10px]">
             <div className="productInfoItem flex justify-between w-[150px]">
@@ -118,32 +186,40 @@ const Product = () => {
             <input
               className="mb-[10px] p-[5px] border-gray-400 border-b"
               type="text"
-              placeholder={product.title}
-              onChange={handleInput}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               name="title"
             />
             <label className="mb-[10px] text-[gray]">Product Description</label>
             <input
               className="mb-[10px] p-[5px] border-gray-400 border-b"
               type="text"
-              placeholder={product.desc}
-              onChange={handleInput}
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
               name="desc"
             />
             <label className="mb-[10px] text-[gray]">Product Price</label>
             <input
               className="mb-[10px] p-[5px] border-gray-400 border-b"
               type="text"
-              placeholder={product.price}
-              onChange={handleInput}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               name="price"
+            />
+            <label className="mb-[10px] text-[gray]">Categories</label>
+            <input
+              className="mb-[10px] p-[5px] border-gray-400 border-b"
+              type="text"
+              value={cat}
+              onChange={handleCat}
             />
             <label className="mb-[10px] text-[gray]">In Stock</label>
             <select
               className="mb-[10px] border"
               name="inStock"
               id="inStock"
-              onChange={handleInput}
+              value={inStock}
+              onChange={(e) => setInStock(e.target.value)}
             >
               <option value="true">Yes</option>
               <option value="false">No</option>
@@ -159,7 +235,12 @@ const Product = () => {
               <label htmlFor="file">
                 <Publish />
               </label>
-              <input type="file" id="file" className="hidden" />
+              <input
+                type="file"
+                id="file"
+                className="hidden"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
             <button
               className="productButton p-[5px] rounded-[5px] bg-[darkblue] font-semibold text-white"

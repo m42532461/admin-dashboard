@@ -18,6 +18,13 @@ const app = initializeApp(firebaseConfig);
 
 export default app;
 
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+
 export const uploadFunction = (file) => {
   const fileName = new Date().getTime() + file.name;
   const storage = getStorage(app);
@@ -47,14 +54,14 @@ export const uploadFunction = (file) => {
       }
     },
     (error) => {
+      console.log(error);
       // Handle unsuccessful uploads
     },
     () => {
       // Handle successful uploads on complete
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        const product = { ...input, img: downloadURL, categories: cat };
-        return product;
+        return downloadURL;
       });
     }
   );

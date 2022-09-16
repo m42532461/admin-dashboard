@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Chart from "../components/Chart";
 import FeaturedInfo from "../components/FeaturedInfo";
 import WidgetLg from "../components/WidgetLg";
 import WidgetSm from "../components/WidgetSm";
 
-import { userData } from "../data";
 import { userRequest } from "../requestMethods";
 const home = () => {
   const [userStats, setUserStats] = useState([]);
+  const navigate = useNavigate();
 
   const MONTHS = useMemo(
     () => [
@@ -28,6 +29,10 @@ const home = () => {
   );
 
   useEffect(() => {
+    const user = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root"))?.user
+    )?.currentUser;
+    if (!user) navigate("/");
     const getStats = async () => {
       try {
         const res = await userRequest.get("/users/stats");

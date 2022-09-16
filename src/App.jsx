@@ -3,7 +3,7 @@ import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import UserList from "./pages/UserList";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import User from "./pages/User";
 import NewUser from "./pages/NewUser";
 import ProductList from "./pages/ProductList";
