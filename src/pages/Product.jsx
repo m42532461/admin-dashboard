@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Chart from "../components/Chart";
 import { productData } from "../data";
+import { getProduct } from "../redux/apiCalls";
+import { userRequest } from "../requestMethods";
 const Product = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
@@ -12,6 +14,10 @@ const Product = () => {
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+  };
 
   const MONTHS = useMemo(
     () => [
@@ -50,6 +56,11 @@ const Product = () => {
     };
     getStats();
   }, [productId, MONTHS]);
+
+  // get product detail
+  // set product state
+  // onChange -> setState
+  // onClick -> update product
 
   return (
     <div className="product flex flex-col flex-[4] m-5 ">
@@ -132,7 +143,10 @@ const Product = () => {
               </label>
               <input type="file" id="file" className="hidden" />
             </div>
-            <button className="productButton p-[5px] rounded-[5px] bg-[darkblue] font-semibold text-white">
+            <button
+              className="productButton p-[5px] rounded-[5px] bg-[darkblue] font-semibold text-white"
+              onClick={handleUpdate}
+            >
               Update
             </button>
           </div>
