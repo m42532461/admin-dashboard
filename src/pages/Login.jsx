@@ -4,26 +4,21 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../redux/apiCalls";
 
-const Login = () => {
+const Login = ({ user, setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [click, setClick] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const user = JSON.parse(
-      JSON.parse(localStorage.getItem("persist:root"))?.user
-    )?.currentUser;
-
-    if (user) {
-      navigate("/");
-    }
-  }, []);
+  // const user = JSON.parse(
+  //   JSON.parse(localStorage.getItem("persist:root"))?.user
+  // )?.currentUser;
 
   const handleClick = (e) => {
     e.preventDefault();
     // redux -> send request
     login(dispatch, { username, password });
+    setUser(true);
     navigate("/");
   };
 

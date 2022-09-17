@@ -7,8 +7,8 @@ import WidgetSm from "../components/WidgetSm";
 
 import { userRequest } from "../requestMethods";
 const home = () => {
-  const [userStats, setUserStats] = useState([]);
   const navigate = useNavigate();
+  const [userStats, setUserStats] = useState([]);
 
   const MONTHS = useMemo(
     () => [
@@ -29,10 +29,6 @@ const home = () => {
   );
 
   useEffect(() => {
-    const user = JSON.parse(
-      JSON.parse(localStorage.getItem("persist:root"))?.user
-    )?.currentUser;
-    if (!user) navigate("/");
     const getStats = async () => {
       try {
         const res = await userRequest.get("/users/stats");
@@ -42,7 +38,9 @@ const home = () => {
             { name: MONTHS[item._id - 1], "Active User": item.total },
           ]);
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     getStats();
   }, [MONTHS]);
