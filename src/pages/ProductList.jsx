@@ -64,10 +64,12 @@ const ProductList = () => {
     },
   ];
 
+  console.log(products);
+
   return (
     <div className="flex flex-[4] ">
       <DataGrid
-        rows={products}
+        rows={products.data}
         columns={columns}
         getRowId={(row) => row._id}
         pageSize={8}

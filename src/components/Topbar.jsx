@@ -1,11 +1,14 @@
 import React from "react";
 import { NotificationsNone, Language, Settings } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/apiCalls";
 const Topbar = ({ user, setUser }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.user?.currentUser);
+  console.log(currentUser);
   const handleLogout = () => {
     localStorage.removeItem("persist:root");
     logout(dispatch);
@@ -42,7 +45,10 @@ const Topbar = ({ user, setUser }) => {
           </div>
           <Link to="/login">
             <img
-              src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={
+                currentUser?.img ||
+                "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"
+              }
               alt=""
               className="topAvator w-10 h-10 rounded-full cursor-pointer bg-red-200"
             />

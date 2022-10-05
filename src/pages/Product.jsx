@@ -19,9 +19,11 @@ const Product = () => {
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
 
-  const product = useSelector((state) =>
-    state.product.products.find((product) => product._id === productId)
-  );
+  const product = useSelector((state) => {
+    return state.product.products.data.find(
+      (product) => product._id === productId
+    );
+  });
   console.log(product);
 
   const [title, setTitle] = useState(product.title);

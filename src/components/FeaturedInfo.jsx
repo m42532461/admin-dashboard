@@ -8,14 +8,13 @@ const FeaturedInfo = () => {
     const getIncome = async () => {
       try {
         const res = await userRequest.get("orders/income");
-        setIncome(res.data);
-        setPerc((res.data[1]?.total * 100) / res.data[0]?.total - 100);
+        const sortedRes = res.data.sort((a, b) => a._id - b._id);
+        setIncome(sortedRes);
+        setPerc((sortedRes[1]?.total * 100) / sortedRes[0]?.total - 100);
       } catch (error) {}
     };
     getIncome();
   }, []);
-
-  console.log("wrong order:");
   console.log(income);
 
   return (

@@ -13,7 +13,7 @@ const Chart = ({ title, data, dataKey, grid }) => {
     <div className="chart p-5 m-5 shadow-lg">
       <h3 className="chartTitle mb-5 font-semibold text-[22px]">{title}</h3>
       <ResponsiveContainer width="100%" aspect={4 / 1}>
-        <LineChart data={data}>
+        <LineChart data={data.sort((a, b) => a.name - b.name)}>
           <XAxis dataKey="name" stroke="#5550bd" />
           <Line type="monotone" dataKey={dataKey} stroke="#5550bd" />
           <Tooltip />

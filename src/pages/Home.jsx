@@ -35,7 +35,11 @@ const home = () => {
         res.data.map((item) => {
           setUserStats((prev) => [
             ...prev,
-            { name: MONTHS[item._id - 1], "Active User": item.total },
+            {
+              name: MONTHS[item._id - 1],
+              "Active User": item.total,
+              order: item._id,
+            },
           ]);
         });
       } catch (error) {
@@ -45,14 +49,19 @@ const home = () => {
     getStats();
   }, [MONTHS]);
 
-  // bug
-  console.log(userStats);
+  const filterUserState = (oriUserStats) => {
+    let temp = {};
+    let out = oriUserStats.filter((ele) => {
+      return temp.hasOwnProperty(ele.order) ? false : (temp[ele.order] = true);
+    });
+    return out;
+  };
 
   return (
     <div className="flex-col flex-[4]">
       <FeaturedInfo />
       <Chart
-        data={userStats}
+        data={filterUserState(userStats).sort((a, b) => a.order - b.order)}
         title="User Analytics"
         grid
         dataKey="Active User"
