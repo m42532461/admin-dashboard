@@ -18,7 +18,7 @@
 
 如上圖中的 __"http://127.0.0.1:5173/"__
 
-__注意__ : 需搭配其[後端 api](https://github.com/m42532461/eCommerceAPI)，否則抓不到資料。
+__注意__ : 需搭配其後端 api，否則頁面抓不到資料，請參考[後端 README](https://github.com/m42532461/eCommerceAPI)。
 
 
 
