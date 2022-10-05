@@ -12,7 +12,7 @@
 
 ## 如何啟用
 
-需安裝 [node.js](https://nodejs.org/zh-tw/download/)，下載 code後進入本資料夾，執行```npm run dev```，進入其路徑即可看到畫面
+需安裝 [node.js](https://nodejs.org/zh-tw/download/)，下載 code後進入本資料夾，先執行```npm i```下載所需 module，並執行```npm run dev```，進入其路徑即可看到畫面
 
 ![執行npm run dev後結果](https://upload.cc/i1/2022/10/05/vVjb5k.jpg)
 
